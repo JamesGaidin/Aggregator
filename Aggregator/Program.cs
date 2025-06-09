@@ -9,6 +9,16 @@ namespace Aggregator
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                           .AllowAnyMethod()
+                           .AllowAnyHeader();
+                });
+            });
+
             builder.Services.AddDbContext<Aggregator.Data.AggregatorContext>(options =>
                 options.UseSqlite("Data Source=aggregator.db"));
 
@@ -25,6 +35,8 @@ namespace Aggregator
             }
 
             app.UseHttpsRedirection();
+
+            app.UseCors("AllowAll");
 
             app.UseAuthorization();
 
