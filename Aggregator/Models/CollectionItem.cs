@@ -5,6 +5,8 @@ namespace Aggregator.Models
     public class CollectionItem
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
 
         // Core item data
         public string Title { get; set; }
