@@ -3,6 +3,7 @@ using System;
 using Aggregator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aggregator.Migrations
 {
     [DbContext(typeof(AggregatorContext))]
-    partial class AggregatorContextModelSnapshot : ModelSnapshot
+    [Migration("20250610205413_LinkCollectionItemsToUser")]
+    partial class LinkCollectionItemsToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.5");

@@ -5,8 +5,8 @@ namespace Aggregator.Models
     public class CollectionItem
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public User User { get; set; }
+        public string UserId { get; set; } = string.Empty;
+        public AppUser User { get; set; } = null!;
 
         // Core item data
         public string Title { get; set; }

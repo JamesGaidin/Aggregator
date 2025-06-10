@@ -1,13 +1,13 @@
 ﻿using Aggregator.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
 
 namespace Aggregator.Data
 {
-    public class AggregatorContext : DbContext
+    public class AggregatorContext : IdentityDbContext<AppUser>
     {
         public AggregatorContext(DbContextOptions<AggregatorContext> options) : base(options) { }
-        public DbSet<User> Users { get; set; }
-        public DbSet<CollectionItem> CollectionItems { get; set; }
+
+        public DbSet<CollectionItem> CollectionItems { get; set; } = null!;
     }
 }
