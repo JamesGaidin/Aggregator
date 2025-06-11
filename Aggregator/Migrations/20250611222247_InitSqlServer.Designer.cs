@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Aggregator.Migrations
 {
     [DbContext(typeof(AggregatorContext))]
-    [Migration("20250611190900_InitSqlServer")]
+    [Migration("20250611222247_InitSqlServer")]
     partial class InitSqlServer
     {
         /// <inheritdoc />
@@ -92,11 +92,9 @@ namespace Aggregator.Migrations
 
             modelBuilder.Entity("Aggregator.Models.CollectionItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("AuthenticationDetails")
                         .IsRequired()
