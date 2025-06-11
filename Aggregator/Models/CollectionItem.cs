@@ -4,7 +4,7 @@ namespace Aggregator.Models
 {
     public class CollectionItem
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; } = new Guid();
         public string UserId { get; set; } = string.Empty;
         public AppUser User { get; set; } = null!;
 

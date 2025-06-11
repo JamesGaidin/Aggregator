@@ -37,7 +37,7 @@ namespace Aggregator.Controllers
 
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<CollectionItem>> GetItem(int id)
+        public async Task<ActionResult<CollectionItem>> GetItem(Guid id)
         {
             var item = await _context.CollectionItems.FindAsync(id);
             if (item == null) return NotFound();
@@ -45,21 +45,18 @@ namespace Aggregator.Controllers
         }
 
         [HttpPost]
-        [HttpPost]
-        public async Task<ActionResult<CollectionItem>> CreateItem(CollectionItem item)
+        public async Task<IActionResult> CreateItem(CollectionItem item)
         {
-            var userId = GetUserId();
-            item.UserId = userId;
-
+            item.Id = Guid.NewGuid(); // optional; or let the DB do it
             _context.CollectionItems.Add(item);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction(nameof(GetItem), new { id = item.Id }, item);
         }
 
 
+
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateItem(int id, CollectionItem item)
+        public async Task<IActionResult> UpdateItem(Guid id, CollectionItem item)
         {
             if (item.UserId != GetUserId())
                 return Forbid();
@@ -70,7 +67,7 @@ namespace Aggregator.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteItem(int id)
+        public async Task<IActionResult> DeleteItem(Guid id)
         {
             var item = await _context.CollectionItems.FindAsync(id);
             if (item.UserId != GetUserId())

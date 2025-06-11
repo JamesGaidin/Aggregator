@@ -1,18 +1,23 @@
 using Aggregator.Data;
 using Aggregator.Models;
+using Aggregator.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add SQLite + Identity
 builder.Services.AddDbContext<AggregatorContext>(options =>
-    options.UseSqlite("Data Source=aggregator.db"));
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // Add Identity with default token providers
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AggregatorContext>()
     .AddDefaultTokenProviders();
+builder.Services.AddScoped<JwtTokenService>();
 
 // Enable controllers
 builder.Services.AddControllers();
