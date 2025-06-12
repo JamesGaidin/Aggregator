@@ -1,17 +1,26 @@
-﻿import React from 'react';
-import CollectionList from './components/CollectionList';
+﻿import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import DashboardPage from "./pages/DashboardPage";
+import RegisterPage from "./pages/RegisterPage";
+import RequireAuth from "./components/RequireAuth";
 
-function App() {
+const App = () => {
     return (
-        <div className="min-h-screen bg-gray-50">
-            <header className="bg-green-700 text-white p-4 text-2xl font-bold">
-                🐊 Aggregator
-            </header>
-            <main>
-                <CollectionList />
-            </main>
-        </div>
+        <Router>
+            <Routes>
+                <Route path="/" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
+                <Route
+                    path="/dashboard"
+                    element={
+                        <RequireAuth>
+                            <DashboardPage />
+                        </RequireAuth>
+                    }
+                />
+            </Routes>
+        </Router>
     );
-}
+};
 
 export default App;
